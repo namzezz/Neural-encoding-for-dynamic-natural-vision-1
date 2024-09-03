@@ -1,46 +1,88 @@
+# NeuroVision
 
-ECoG and Visual Stimuli Processing Documentation
-------------------------------------------------
+## Overview
 
-Objective:
------------
-The main goal is to train a model that can predict visual stimuli (images) from iEEG data. The hypothesis is that the iEEG data, which is electrical activity from the brain, will have patterns that correlate with the visual stimuli the subject was seeing.
+**NeuroVision** is a project that explores the intricate relationship between intracranial electroencephalography (iEEG) data and visual stimuli, aiming to predict visual experiences based on brain activity. By leveraging Convolutional Neural Networks (CNNs), the project seeks to decode neural responses to external stimuli, contributing to the broader field of brain-computer interfaces.
 
-Steps Taken:
--------------
-1. **Data Acquisition**:
-    - The data consisted of `.mat` files containing iEEG segments and `.tsv` files containing event details.
-    - Each iEEG segment corresponds to an event, which has an associated visual stimulus.
+## Features
 
-2. **Data Preprocessing**:
-    - The iEEG segments were paired with the corresponding visual stimuli based on the events.tsv files.
-    - This resulted in a dataset where each entry consists of an iEEG segment and a visual stimulus image.
+- **Data Preprocessing**: Preprocessing of iEEG data and visual stimuli images for model training.
+- **Temporal Segmentation**: Segmentation of iEEG data based on stimulus durations.
+- **Data Pairing**: Associating iEEG segments with corresponding visual stimuli.
+- **Model Training**: Training a CNN model to reconstruct visual stimuli from iEEG data.
+- **Evaluation**: Assessing the model's performance using visual similarity metrics and Grey Level Co-occurrence Matrix (GLCM) analysis.
 
-3. **Model Building**:
-    - A Convolutional Neural Network (CNN) was designed to take in the iEEG data and predict the visual stimulus.
-    - The model was trained in batches due to memory limitations.
+## Methodology
 
-4. **Model Evaluation**:
-    - The trained model was then used to predict visual stimuli from test iEEG data.
-    - The predictions were compared with the actual visual stimuli to evaluate the model's performance.
+### Data Preprocessing
 
-Challenges:
-------------
-- **Data Size**: The iEEG data segments and visual stimuli images are large, which can cause memory issues during training.
-- **Complexity**: Predicting visual stimuli from iEEG data is a complex task. The neural patterns in the brain that correspond to visual stimuli are intricate and can be influenced by various factors.
+- **Initial Image Data**: Extracted and resized to 224×224 pixels.
+- **Temporal Segmentation**: Segments of iEEG data aligned with visual stimuli using a 2-second window.
+- **Data Pairing**: Each iEEG segment is paired with its corresponding visual stimulus, creating a 224×224×36 array.
 
-Next Steps for Improvement:
-----------------------------
-1. **Data Augmentation**: Increase the dataset size by applying transformations to the existing data, such as rotations and flips.
-2. **Complex Models**: Explore more complex models like autoencoders or transformer-based models.
-3. **Feature Extraction**: Instead of using raw iEEG data, extract meaningful features that could be more informative for the model.
-4. **Regularization**: Apply techniques like dropout or weight decay to prevent overfitting.
-5. **Hyperparameter Tuning**: Systematically search for the best hyperparameters for the model.
-6. **Domain Knowledge**: Incorporate knowledge from neuroscience to inform the model-building process.
+### Dataset
 
-Remarks on the Stimuli Image Portion:
---------------------------------------
-The visual stimuli images used in the project were portions of the original stimuli. This could be due to various reasons:
-- **Focus on Regions of Interest**: The research might have been focused on specific regions of the visual stimuli that are most relevant or evoke the strongest neural responses.
-- **Data Reduction**: Using portions of the stimuli can reduce the data size, making processing more manageable.
-- **Experiment Design**: The experiment from which the data was collected might have been designed in a way that only portions of the stimuli were shown to the subjects
+- **Source**: The dataset used for this project is available at [OpenNeuro](https://openneuro.org/datasets/ds004194/versions/1.0.1).
+- **Structure**: The dataset includes various files related to spatial and temporal pattern tasks, along with metadata and iEEG data.
+
+### Model
+
+- **Architecture**: A Convolutional Neural Network (CNN) is utilized to decode visual stimuli from iEEG data.
+- **Evaluation**: The model achieved a similarity score of 0.307 on a scale of -1 to 1, indicating moderate success in reconstructing visual stimuli.
+
+## Results
+
+- **Visual Similarity**: The model was moderately successful in reconstructing images from iEEG data.
+- **GLCM Analysis**: Provided quantitative insights into the texture and spatial relationships of the original and reconstructed images.
+
+## Challenges
+
+1. **Variable Duration and Aggregate Stimuli**: Difficulties in handling variable stimulus durations and aggregating consecutive stimuli.
+2. **Group Size and Segmenting iEEG Data**: Challenges in determining optimal group size and segmenting data.
+3. **Composite Visual Stimuli**: Issues in creating effective composite representations of visual stimuli.
+
+## Conclusion
+
+The project makes significant strides in decoding visual stimuli from iEEG data, despite the challenges faced. The achieved results provide valuable insights, and the work sets the stage for future explorations in brain-computer interfaces and neuroscience.
+
+## Future Work
+
+- **Social Features**: Enhancing the project by adding social features such as user interactions and multiplayer capabilities.
+- **Platform Expansion**: Expanding the project to support multiple platforms, including web and desktop.
+- **Personalized Recommendations**: Incorporating a recommendation system based on user preferences.
+- **Community Engagement**: Introducing features that allow users to share experiences and foster a vibrant community.
+
+## Installation
+
+### Prerequisites
+
+- Python 3.x
+- TensorFlow/Keras
+- Jupyter Notebook
+- Required Python libraries (listed in `requirements.txt`)
+
+### Steps
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/neurovision.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd neurovision
+   ```
+3. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run the Jupyter Notebook:
+   ```bash
+   jupyter notebook model.ipynb
+   ```
+
+## Usage
+
+1. Load the dataset and preprocess it as per the instructions in the notebook.
+2. Train the CNN model using the provided `model.ipynb` notebook.
+3. Evaluate the model performance using the provided metrics and analysis tools.
+
