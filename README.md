@@ -45,13 +45,6 @@
 
 The project makes significant strides in decoding visual stimuli from iEEG data, despite the challenges faced. The achieved results provide valuable insights, and the work sets the stage for future explorations in brain-computer interfaces and neuroscience.
 
-## Future Work
-
-- **Social Features**: Enhancing the project by adding social features such as user interactions and multiplayer capabilities.
-- **Platform Expansion**: Expanding the project to support multiple platforms, including web and desktop.
-- **Personalized Recommendations**: Incorporating a recommendation system based on user preferences.
-- **Community Engagement**: Introducing features that allow users to share experiences and foster a vibrant community.
-
 ## Installation
 
 ### Prerequisites
